@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block body %}
+
+<div class="container" style="border: 1px solid black; text-align: center; max-width: 500px;padding-bottom: 31px;">
+    <h1 style="text-align: center; padding: 10px;">{% trans "Log In" %}</h1>
+
+    {% get_providers as socialaccount_providers %}
+
+    {% if socialaccount_providers %}
+    <p style="text-align: center; padding: 10px;">{% blocktrans with site.name as site_name %}Please log in with one
+        of your Google accounts.</p>
+    <!-- . Or, <a href="{{ signup_url }}">sign up</a> 
+        for a {{ site_name }} account:{% endblocktrans %} -->
+    <div class="login_div_1">
+        <div class="socialaccount_ballot">
+
+            <!-- <ul class="socialaccount_providers" style="text-align: center;"> -->
+
+            {% include 'socialaccount/snippets/provider_list.html' with process="login" %}
+            <!-- </ul> -->
+
+            <!-- <div class="login-or">{% trans 'or' %}</div> -->
+
+        </div>
+
+        {% include "socialaccount/snippets/login_extra.html" %}
+
+        {% else %}
+        <p>{% blocktrans %}If you have not created an account yet, then please
+            <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}
+        </p>
+        {% endif %}
+
+        <!-- <form class="login" method="POST" action="{% url 'account_login' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
+            <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a> 
+            <br></br>
+            <button class="primaryAction" type="submit">{% trans "Log In" %}</button>
+        </form> -->
+    </div>
+</div>
+
+{% endblock body %}

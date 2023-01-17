@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block body %}
+
+<div class="bg-light py-3">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 mb-0"><a href="{% url 'Home' %}">Home</a> <span class="mx-2 mb-0">/</span>
+				<strong class="text-black">Catalogue</strong>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container site-section-heading pt-3 mb-4 my-2">
+	<h2 class="text-black">Catalogue</h2>
+</div>
+
+<div class="site-section site-blocks-2" style="padding-top: 2em;">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="">
+				<a class="block-2-item" href="{% url 'filter-lr' %}">
+					<figure class="image">
+						<img src="{% static 'images/living_room.jpg' %}" alt="" class="img-fluid">
+					</figure>
+					<div class="text">
+						<span class="text-uppercase">Collections</span>
+						<h3>Living Room</h3>
+					</div>
+				</a>
+			</div>
+			<div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="100">
+				<a class="block-2-item" href="{% url 'filter-br' %}">
+					<figure class="image">
+						<img src="{% static 'images/bedroom.jpg' %}" alt="" class="img-fluid">
+					</figure>
+					<div class="text">
+						<span class="text-uppercase">Collections</span>
+						<h3>Bedroom</h3>
+					</div>
+				</a>
+			</div>
+			<div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="200">
+				<a class="block-2-item" href="{% url 'filter-k' %}">
+					<figure class="image">
+						<img src="{% static 'images/kitchen.jpg' %}" alt="" class="img-fluid">
+					</figure>
+					<div class="text">
+						<span class="text-uppercase">Collections</span>
+						<h3>Kitchen</h3>
+					</div>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock body %}

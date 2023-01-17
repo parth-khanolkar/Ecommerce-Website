@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block body %}
+
+<div class="bg-light py-3">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 mb-0"><a href="{% url 'Home' %}">Home</a> <span class="mx-2 mb-0">/</span>
+				<strong class="text-black">New Arrivals</strong>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="site-section">
+	<div class="container">
+
+		<div class="row mb-5">
+			<div class="col-md-9 order-2">
+
+				<div class="row">
+					<div class="col-md-12 mb-5">
+						<div class="float-md-left mb-4">
+							<h2 class="text-black h5">Shop All</h2>
+						</div>
+						<div class="d-flex">
+							<!-- <div class="dropdown mr-1 ml-md-auto">
+								<button type="button" class="btn btn-secondary btn-sm dropdown-toggle"
+									id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true"
+									aria-expanded="false">
+									Latest
+								</button>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+									<a class="dropdown-item" id="Living-room" href="{% url 'filter-lr' %}">Living Room</a>
+									<a class="dropdown-item" id="Bed-room" href="{% url 'filter-br' %}">Bedroom</a>
+									<a class="dropdown-item" id="Kitchen" href="{% url 'filter-k' %}">Kitchen</a>
+								</div>
+							</div> -->
+							<!-- <div class="dropdown mr-1 ml-md-auto">
+								<button type="button" class="btn btn-secondary btn-sm dropdown-toggle"
+									id="dropdownMenuReference" data-toggle="dropdown">Reference</button>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuReference">
+									<a class="dropdown-item" href="{% url 'Shop' %}">Relevance</a>
+									<a class="dropdown-item" href="{% url 'sort-desc' %}">Name, A to Z</a>
+									<a class="dropdown-item" href="{% url 'sort-asc' %}">Name, Z to A</a>
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="{% url 'sort-l-to-h' %}">Price, low to high</a>
+									<a class="dropdown-item" href="{% url 'sort-h-to-l' %}">Price, high to low</a>
+								</div>
+							</div> -->
+						</div>
+					</div>
+				</div>
+				<div class="row mb-5">
+					{% if products %}
+					{% for i in products %}
+					<div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
+						<div class="block-4 text-center border">
+							<figure class="block-4-image">
+								<a href="{% url 'Details' i.id %}"><img src="{{ i.product_image.url }}"
+										alt="Image placeholder" class="img-fluid"></a>
+							</figure>
+							<div class="block-4-text p-4">
+								<h3><a href="{% url 'Details' i.id %}">{{ i.product_name }}</a></h3>
+								<!-- <p class="mb-0">Finding perfect t-shirt</p> -->
+								<p class="text-primary font-weight-bold">₹ {{ i.product_price }}</p>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+					{% else %}
+					<div class="my-3 mx-3">
+						<h2 class="text-center">No Products Found!</h2>
+					</div>
+					{% endif %}
+
+
+				</div>
+				<div class="row" data-aos="fade-up">
+					<div class="col-md-12 text-center">
+						<div class="site-block-27">
+							{% if products.has_other_pages %}
+							<ul>
+								{% if products.has_previous %}
+								<li><a href="?page={{products.previous_page_number}}">Previous</a></li>
+								{% else %}
+								<li class="disabled"><a href="#">Previous</a></li>
+								{% endif %}
+
+								{% for i in products.paginator.page_range %}
+								{% if products.number == i %}
+								<li class="active"><a href="#">{{i}}</a></li>
+								{% else %}
+								<li><a href="?page={{i}}">{{i}}</a></li>
+								{% endif %}
+								{% endfor %}
+
+								{% if products.has_next %}
+								<li><a href="?page={{products.next_page_number}}">Next</a></li>
+								{% else %}
+								<li class="disabled"><a href="#">Next</a></li>
+								{% endif %}
+							</ul>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-3 order-1 mb-5 mb-md-0">
+				<div class="border p-4 rounded mb-4">
+					<h3 class="mb-3 h6 text-uppercase text-black d-block">Categories</h3>
+					<ul class="list-unstyled mb-0">
+						<li class="mb-1"><a href="{% url 'filter-lr' %}" class="d-flex"><span>Living Room</span></a>
+						</li>
+						<li class="mb-1"><a href="{% url 'filter-br' %}" class="d-flex"><span>Bedroom</span></a></li>
+						<li class="mb-1"><a href="{% url 'filter-k' %}" class="d-flex"><span>Kitchen</span></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="site-section site-blocks-2">
+					<div class="row justify-content-center text-center mb-5">
+						<div class="col-md-7 site-section-heading pt-4">
+							<h2>Categories</h2>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="">
+							<a class="block-2-item" href="{% url 'filter-lr' %}">
+								<figure class="image">
+									<img src="{% static 'images/living_room.jpg' %}" alt="" class="img-fluid">
+								</figure>
+								<div class="text">
+									<span class="text-uppercase">Collections</span>
+									<h3>Living Room</h3>
+								</div>
+							</a>
+						</div>
+						<div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="100">
+							<a class="block-2-item" href="{% url 'filter-br' %}">
+								<figure class="image">
+									<img src="{% static 'images/bedroom.jpg' %}" alt="" class="img-fluid">
+								</figure>
+								<div class="text">
+									<span class="text-uppercase">Collections</span>
+									<h3>Bedroom</h3>
+								</div>
+							</a>
+						</div>
+						<div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="200">
+							<a class="block-2-item" href="{% url 'filter-k' %}">
+								<figure class="image">
+									<img src="{% static 'images/kitchen.jpg' %}" alt="" class="img-fluid">
+								</figure>
+								<div class="text">
+									<span class="text-uppercase">Collections</span>
+									<h3>Kitchen</h3>
+								</div>
+							</a>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+{% endblock body %}
